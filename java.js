@@ -94,24 +94,42 @@ const perguntas = [
 // possível seletor: body > div:first-child
 const id = '#quiz' //# é uma forma de encontrar um nó html na página
 const quiz = document.querySelector(id) //localizou o elemento de id quiz e colocou dentro de uma var
-const template = document.querySelector('template')
+const template = document.querySelector('template')     //document transforma em java script. O query selector é uma função de pesquisa 
+
+const corretas = new Set()
+const totalDePerguntas = perguntas.length
+const mostrarTotal = document.querySelector('#acertos span')
+mostrarTotal.textContent = corretas.size + ' de ' + totalDePerguntas
 
 // loop ou laço de repetição
-for(const item of perguntas) {
-  const quizItem = template.content.cloneNode(true)
-  quizItem.querySelector('h3').textContent = item.pergunta
+for(const item of perguntas) { //para cada item de perguntas. { é um escopo que pertence ao for
+  const quizItem = template.content.cloneNode(true)   //criou o quizItem e fez uma função para clonar (clonenode) o nó (cada tag é chamada de nó). Para clonar todos os nós, se coloca o true
+  quizItem.querySelector('h3').textContent = item.pergunta  //pegou o quizItem, pesquisou o h3 (cada pergunta), o conteúdo de texto dele e atribuiu um novo valor, que está no item da pergunta.
   
-  for(let resposta of item.respostas) {
-    const dt = quizItem.querySelector('dl dt').cloneNode(true)
-    dt.querySelector('span').textContent = resposta
-
-    quizItem.querySelector('dl').appendChild(dt)
+  for(let resposta of item.respostas) { //para cada resposta do item respostas, vai rodar 3x (são três opções de respostas)
+    const dt = quizItem.querySelector('dl dt').cloneNode(true)//vai pegar todo o dt. Vai no quizItem e pesquisar ('dl dt') dentro de um dl, um dt (que é filho do dl) e clonar.
+    dt.querySelector('span').textContent = resposta //dentro do span vai colocar um texto que vai ser a resposta
+    dt.querySelector('input').setAttribute('name', 'pergunta-' + perguntas.indexOf(item))  //input é a função de selecionar uma alternativa (a, b, c)
+    dt.querySelector('input').value = item.respostas.indexOf(resposta)   //pega de dentro do codigo o valor e atribuir as respostas e procurar dentro delas o índice (a=0, b=1, c=2) das respostas
+    dt.querySelector('input').onchange = (event) => {
+     //quando houver mudança, o código fará essa função chamada evento
+     //seta é chamada arrow, por isso está se criando uma arrow function
+      const estaCorreta = event.target.value == item.correta //o == esta atribuindo uma comparação
+      
+      corretas.delete(item)  //se mudar a escolha, a sua pontuação muda.
+      if(estaCorreta) {  //se esta correta, vai acontecer isso:
+        corretas.add(item)  //se acertar, a pontuação é somada
+      }
+      mostrarTotal.textContent = corretas.size + ' de ' + totalDePerguntas
+    }
+    
+     quizItem.querySelector('dl').appendChild(dt) //o quizitem procura o dl, adiciona um filho que é o dt. Isso vai fazer com que as alternativas das perguntas (a, b, c) apareçam na tela
   }
 
   
-  quizItem.querySelector('dl dt').remove()
+  quizItem.querySelector('dl dt').remove() //sem esse código, todas as primeiras alternativas iriam ficar com o texto "resposta A"
   
   
   // coloca a pergunta na tela
-  quiz.appendChild(quizItem)
+  quiz.appendChild(quizItem)  //como ta dentro do loop, repete em todas as perguntas para aparecer na tela.
 }

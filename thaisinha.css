@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+/*o * representa um seletor universal de TODOS os elementos*/
+/* pegou o seletor universal e tudo que estiver na raiz (root)*/
+/* se não tiver o inter, substitui por essa sans serif*/
+*, :root {  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  
+  font-family: 'Inter', sans-serif; 
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+main {
+  padding: 20px;
+  max-width: 640px;  /*largura máxima de 640pixels*/
+  margin: 0 auto 64px; 
+}
+
+header{
+  margin-top: 64px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #47d7ff; /*só border colocaria borda dos 4 lados do texto principal. Com border bottom, coloca só embaixo.*/
+}
+
+/*uma declaração */ 
+#acertos {
+  text-align: center; /*alinhar o texto "Acertos 0 de 10" no centro*/
+  background-color: rgb(255, 0, 162);  /*colocou a cor do plano de fundo do texto "acertos 0 de 10*/
+
+  position: fixed;  /*fixar o texto "Acertos 0 de 10*/
+  bottom:0;
+  left:0;
+
+  width: 100%;
+  padding: 12px;  /*CAIXA. preenchimento/tamanho de todas as laterais da caixa que aparece o texto*/
+}
+
+
+/*coloca a borda de todas as caixas coloridas e com 1pixel
