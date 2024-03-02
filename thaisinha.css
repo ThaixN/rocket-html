@@ -17,6 +17,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+body {
+  background-color: #c3c2c3;
+}
+
 main {
   padding: 20px;
   max-width: 640px;  /*largura máxima de 640pixels*/
@@ -26,7 +30,98 @@ main {
 header{
   margin-top: 64px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #47d7ff; /*só border colocaria borda dos 4 lados do texto principal. Com border bottom, coloca só embaixo.*/
+  border-bottom: 1px solid #47d7ff; /*espeçamento embaixo do texto*/
+  /*só border colocaria borda dos 4 lados do texto principal. Com border bottom, coloca só embaixo.*/
+}
+
+header h1 {
+  font-size: 30px;
+  color: #060189;
+}
+
+#quiz {
+  counter-reset: quiz-item;
+}
+
+.quiz-item {
+  margin-top: 24px;
+  border: 1px solid #9a9a9a;
+  border-radius: 6px;
+
+  overflow: hidden;
+}
+
+.quiz-item h3 { /*h3 é cada pergunta. Está colocando o espaçamento entre a pergunta e o conjunto de alternativas.*/
+  padding: 16px 20px; /*preenchimento interno em cima, nas laterais.*/
+  color: #ff07a8;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background-color: #e3ffff30;
+}
+
+.quiz-item h3:before {
+  counter-increment: quiz-item;
+  content: counter(quiz-item);
+
+  background-color: #71faffad;
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /*para não haver encurtamento das bolinhas clicáveis das alternativas, quando diminui o tamanho da página*/
+  }
+
+.quiz-item dl { /*dl são as alternativas, aqui está editando o espaçamento do conjunto de alternativas ate a borda.*/
+  padding: 20px 24px;
+  display: grid;
+  gap: 8px /*espaço entre os filhos (entre as alternativas*/
+
+}
+
+.quiz-item dl dt {/*está colocando espaçamento entre cada um dos filhos. Entre cada uma das alternativas.*/
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0;
+
+  display: flex; /*coloca um elemento ao lado do outro*/
+  align-items: center;
+  gap: 8px;
+
+  color:rgb(0, 0, 0);
+}
+
+input {
+  all: unset; /*seleciona todas as propriedades*/
+  border: 1px solid #94a3b8;
+  width: 16px;
+  height: 16px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+input:checked { /*determina o que acontece quando clicar no input*/
+  border: 1px solid #47d7ff
+}
+
+input:checked:before {
+  content: "";
+  width: 10px;
+  height: 10px;
+
+  background-color:rgb(255, 0, 162);
+  border-radius: 50%;
 }
 
 /*uma declaração */ 
